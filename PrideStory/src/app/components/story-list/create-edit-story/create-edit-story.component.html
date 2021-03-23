@@ -1,0 +1,134 @@
+    <div class="row">  
+      <div class="col-sm-8 offset-sm-2">        
+          <form #storyForm="ngForm">
+            <div class="form-group">
+              <label for="name">Project Name :</label>
+              <input [(ngModel)]="form.name" type="text" name="name" #name="ngModel" class="form-control"  aria-describedby="idHelp"
+              required autocomplete="off">
+              <span class="text-danger" *ngIf="name.touched && name.errors">
+                <span *ngIf="name.errors?.required">
+                  *Name is required
+                </span>
+                <br>
+              </span>
+
+             <label for="description">Project Description :</label>
+              <textarea [(ngModel)]="form.description" name="description" class="form-control" id="description" aria-describedby="descHelp">
+                        </textarea>
+              
+            <fieldset class="border p-2">
+              <legend>Users :</legend>
+              <label for="userDescription">User Description :</label>
+              <input [(ngModel)]="form.users.userDescription" type="text" name="userDescription" class="form-control"  
+              aria-describedby="idHelp" required autocomplete="off" #userDescription="ngModel">
+
+              <span class="text-danger" *ngIf="userDescription.touched && userDescription.errors">
+                <span *ngIf="userDescription.errors?.required">
+                  *User Description is required
+                </span>
+                <br>
+              </span>
+
+              <label for="functionality">User Functionality Requirements :</label>
+              <input [(ngModel)]="form.users.functionality" type="text" name="functionality" class="form-control"  
+              aria-describedby="idHelp" required autocomplete="off" #userfunctionality="ngModel">
+
+              <span class="text-danger" *ngIf="userfunctionality.touched && userfunctionality.errors">
+                <span *ngIf="userfunctionality.errors?.required">
+                  *Functionality is required
+                </span>
+                <br>
+              </span>
+
+              <label for="benefit">Benefit :</label>
+              <input [(ngModel)]="form.users.benefit" type="text" name="benefit" class="form-control"  
+              aria-describedby="idHelp" required autocomplete="off" #benefit="ngModel">
+
+               <span class="text-danger" *ngIf="benefit.touched && benefit.errors">
+                <span *ngIf="benefit.errors?.required">
+                  *Benefit is required
+                </span>
+                <br>
+              </span>
+            </fieldset>
+
+            <fieldset class="border p-2">
+              <legend>Acceptance Crieteria :</legend>
+              <label for="givenCrieteria">Given Crieteria :</label>
+              <input [(ngModel)]="form.acceptanceCrieteria.givenCrieteria" type="text" name="givenCrieteria" class="form-control"  
+              aria-describedby="idHelp" required autocomplete="off" #givenCrieteria="ngModel">
+
+               <span class="text-danger" *ngIf="givenCrieteria.touched && givenCrieteria.errors">
+                <span *ngIf="givenCrieteria.errors?.required">
+                  *Given Crieteria is required
+                </span>
+                <br>
+              </span>
+
+              <label for="actionTaken">Action Taken :</label>
+              <input [(ngModel)]="form.acceptanceCrieteria.actionTaken" type="text" name="actionTaken" class="form-control"  
+              aria-describedby="idHelp" required autocomplete="off" #actionTaken="ngModel">
+
+              <span class="text-danger" *ngIf="actionTaken.touched && actionTaken.errors">
+                <span *ngIf="actionTaken.errors?.required">
+                  *Action is required
+                </span>
+                <br>
+              </span>
+              <label for="outcome">Outcome :</label>
+              <input [(ngModel)]="form.acceptanceCrieteria.outcome" type="text" name="outcome" class="form-control"  
+              aria-describedby="idHelp" required autocomplete="off" #outcome="ngModel">
+
+              <span class="text-danger" *ngIf="outcome.touched && outcome.errors">
+                <span *ngIf="outcome.errors?.required">
+                  *Outcome is required
+                </span>
+                <br>
+              </span>
+            </fieldset>
+
+            <div class="row mt-3">
+              <div class="col-6">
+                <fieldset class="border p-2">
+                  <legend>Project is :</legend>
+                <div class="form-check-inline">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="priority" [(ngModel)]="form.priority" value="1" required>Active
+                  </label>
+                </div>
+                <div class="form-check-inline">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" name="priority" [(ngModel)]="form.priority" value="0" required>Inactive
+                  </label>
+                </div>
+              </fieldset>
+              </div>
+              <div class="col-6">
+                <fieldset class="border p-2">
+                  <legend>Project Status :</legend>
+                <div class="form-check-inline">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" [(ngModel)]="form.status" name="status" value="1">Done
+                  </label>
+                </div>
+                <div class="form-check-inline">
+                  <label class="form-check-label">
+                    <input type="radio" class="form-check-input" [(ngModel)]="form.status" name="status" value="0">In progress
+                  </label>
+                </div>
+              </fieldset>
+              </div>
+            </div>
+            </div>
+          </form>
+          <button class="btn btn-primary float-right" (click)="createStory(storyForm)" *ngIf="!storyId" [disabled]="!storyForm.valid">Create story</button>
+          <button class="btn btn-primary float-right mr-2" (click)="updateStory()" *ngIf="storyId">Update story</button>
+        
+      </div>
+    </div>
+
+    <div class="modal-footer mt-5">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeStoryModalModal (click)="closeModals()">Cancel</button>
+    </div>
+
+  

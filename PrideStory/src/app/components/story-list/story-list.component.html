@@ -1,0 +1,138 @@
+<div style="margin-top: 15px;">
+    <div class="row">
+      <div class="col-12 pl-0 pr-0">
+        <div class="card m-3">
+          <h2 class="text-center pb-3 pt-3 ">Active Projects</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <!-- <div class="col-12"> -->
+          <ng-container *ngFor="let story of stories">
+            <div class="col-md-6 mb-3" *ngIf="story.priority === '1'">
+                <div class="card">
+                    <div class="card-header">
+                      <strong>Title : </strong> {{ story?.name }}
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-5 ml-2 mb-5 p-3" style="border: 1px solid grey">
+                          <strong>Project Description : </strong>{{story?.description}}
+                        </div>
+                     
+                     
+                        <div class="col-3 mb-5 ml-2 p-3" style="border: 1px solid grey">
+                          <strong>Project is : </strong>
+                          <span *ngIf="story?.priority==1">Active</span>
+                          <span *ngIf="story?.priority !=1">Inactive</span>
+                        </div>
+
+                        <div class="col-3 mb-5 ml-2 p-3" style="border: 1px solid grey">
+                          <strong>Project status : </strong>
+                          <span *ngIf="story?.status==1">Done</span>
+                          <span *ngIf="story?.status !=1">In progress</span>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6" style="border-right: 1px solid grey;">
+                          <strong>Users : </strong><br>
+                          <ul>
+                            
+                            <li><strong>User Description : </strong>{{story?.users?.userDescription}}</li>
+                            <li><strong>Functionality : </strong>{{story?.users?.functionality}}</li>
+                            <li><strong>Benefit Hypothesis : </strong>{{story?.users?.benefit}}</li>
+                           
+                            
+                        </ul>
+                        </div>
+                        <div class="col-6">
+                          <strong>Acceptance Crieteria : </strong><br>
+                          <ul>
+                            
+                            <li><strong>Given crieteria : </strong>{{story?.acceptanceCrieteria?.givenCrieteria}}</li>
+                            <li><strong>Action taken : </strong>{{story?.acceptanceCrieteria?.actionTaken}}</li>
+                            <li><strong>Outcome : </strong>{{story?.acceptanceCrieteria?.outcome}}</li>
+                            
+                        </ul>
+                        </div>
+                      </div>
+                        
+                    </div>
+                    <div class="card-footer">
+                      <div class="float-right">
+                      <!-- <button class="btn btn-primary btn-sm" (click)="selectStory(story)"> Details</button>&nbsp; -->
+                      <button class="btn btn-info btn-sm" (click)="editStory(story.id)"
+                      data-toggle="modal" data-target="#createEditModal"> Edit</button>&nbsp;
+                      <button class="btn btn-danger btn-sm" (click)="deleteStory(stories,story.id)"> Delete</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+          </ng-container>
+        <!-- </div> -->
+    </div>
+    
+    
+    
+ 
+<!-- Modal -->
+<div class="modal fade" id="createEditModal" tabindex="-1" role="dialog" aria-labelledby="createEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="createEditModalLabel" *ngIf="!storyId">Create Story</h5>
+        <h5 class="modal-title" id="createEditModalLabel" *ngIf="storyId">Update Story</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-create-edit-story *ngIf="storyId" [storyId]='storyId' (closeModal)="closeModal()"></app-create-edit-story>
+        <app-create-edit-story *ngIf="!storyId" (closeModal)="closeModal()"></app-create-edit-story>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+    
+    
+    
+    <!-- <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let story of stories">
+  
+          <td>{{ story.id }}</td>
+          <td> {{ story.name }}</td>
+          <td> {{ story.email }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="selectStory(story)"> Show details</button>&nbsp;
+            <button class="btn btn-danger" (click)="deleteStory(stories,story.id)"> Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+    <div class="card text-center" *ngIf="selectedStory">
+        <div class="card-header">
+          # {{selectedStory.id}}
+        </div>
+        <div class="card-block">
+          <h4 class="card-title">{{selectedStory.name}}</h4>
+          <p class="card-text">
+            {{selectedStory.description}}
+          </p>    
+        </div>
+  
+      </div>
+  </div>
+  
